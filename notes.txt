@@ -1,0 +1,7 @@
+sequelize model:generate --name=user --attributes name:string,email:string,password:string,city:string,state:string,hereFor:string
+sequelize model:generate --name=post --attributes userId:integer,title:string,description:string
+sequelize model:generate --name=comment --attributes userId:integer,postId:integer,description:string
+sequelize model:generate --name=job --attributes userId:integer,title:string,description:string,type:string,city:string,state:string
+sequelize model:generate --name=userJob --attributes userId:integer,jobId:integer
+sequelize model:generate --name=event --attributes userId:integer,title:string,description:string,type:string,date:string,start:string,end:string,address:string,city:string,state:string
+sequelize model:generate --name=userEvent --attributes userId:integer,eventId:integer
