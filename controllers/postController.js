@@ -21,8 +21,8 @@ postController.create = async (req,res) => {
             id: decryptedId.userId,
         }})
         const newPost = await models.post.create({
-            title: req.body.title,
-            description: req.body.description
+            title: req.body.Title,
+            description: req.body.Description
         })
         await user.addPost(newPost)
         await newPost.reload()

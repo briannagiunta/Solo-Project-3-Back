@@ -23,7 +23,7 @@ app.use('/events', eventRoutes)
 
 const PORT = process.env.port || 3001
 app.listen(PORT, () => {
-    console.log(`port running on PORT`)
+    console.log(`port running on ${PORT}`)
   routesReport.print()
 })
 

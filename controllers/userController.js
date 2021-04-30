@@ -12,9 +12,9 @@ userController.signUp = async (req, res) => {
         name: req.body.Name,
         email: req.body.Email,
         password: hashedPassword,
-        city: req.body.city,
-        state: req.body.state,
-        hereFor: req.body.hereFor
+        city: req.body.City,
+        state: req.body.State,
+        hereFor: req.body.HereFor
 
       })
       const encryptedId = jwt.sign({ userId: u.id }, process.env.JWT_SECRET)
