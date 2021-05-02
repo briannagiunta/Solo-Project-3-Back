@@ -11,7 +11,7 @@ commentController.create = async (req,res) => {
         const newComment = await models.comment.create({
             userId: decryptedId.userId,
             postId: req.body.postId,
-            description: req.body.description
+            description: req.body.Description
         })
         res.json({message: 'comment added', newComment})
     } catch (error) {
