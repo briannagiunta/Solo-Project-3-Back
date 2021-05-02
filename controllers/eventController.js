@@ -19,14 +19,21 @@ eventController.create = async (req,res) => {
             start: req.body.Start,
             end: req.body.End,
             address: req.body.Address,
-            city: req.body.City,
-            state: req.body.State
+            zip: req.body.Zipcode
         })
         await user.addEvent(newEvent)
         await newEvent.reload()
         res.json({message: 'Event added', newEvent})
     } catch (error) {
       res.json({error})
+    }
+}
+eventController.getAll = async (req,res) => {
+    try {
+        const allEvents = await models.event.findAll()
+        res.json({allEvents})
+    } catch (error) {
+        res.json({error})
     }
 }
 

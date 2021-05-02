@@ -4,5 +4,6 @@ const eventRoutes = express.Router();
 
 
 eventRoutes.post('/create', eventController.create)
+eventRoutes.get('/all', eventController.getAll)
 
 module.exports = eventRoutes;

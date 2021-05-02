@@ -19,8 +19,7 @@ module.exports = (sequelize, DataTypes) => {
     title: DataTypes.STRING,
     description: DataTypes.STRING,
     type: DataTypes.STRING,
-    city: DataTypes.STRING,
-    state: DataTypes.STRING
+    zip: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'job',

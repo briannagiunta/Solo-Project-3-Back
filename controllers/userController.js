@@ -12,13 +12,12 @@ userController.signUp = async (req, res) => {
         name: req.body.Name,
         email: req.body.Email,
         password: hashedPassword,
-        city: req.body.City,
-        state: req.body.State,
+        zip: req.body.Zipcode,
         hereFor: req.body.HereFor
 
       })
       const encryptedId = jwt.sign({ userId: u.id }, process.env.JWT_SECRET)
-      const user = {id: encryptedId, name: u.name, city: u.city, state: u.state, hereFor: u.hereFor}
+      const user = {id: encryptedId, name: u.name, zip: u.zip, hereFor: u.hereFor}
       res.json({message: 'Signed up', user: user})
     } catch (error) {
         res.json({error})
@@ -36,7 +35,7 @@ userController.login = async (req, res) => {
       })
       if (bcrypt.compareSync(req.body.Password, u.password)) {
         const encryptedId = jwt.sign({ userId: u.id }, process.env.JWT_SECRET)
-        const user = {id: encryptedId, name: u.name, city: u.city, state: u.state, hereFor: u.hereFor}
+        const user = {id: encryptedId, name: u.name, zip: u.zip, hereFor: u.hereFor}
         res.json({message: 'login successful', user: user })
       }else{
         res.status(401)
@@ -56,12 +55,21 @@ userController.getUser = async(req,res) => {
         id: decryptedId.userId
       }})
       if(u){
-        const user = {id: req.headers.authorization, name: u.name, city: u.city, state: u.state, hereFor: u.hereFor}
+        const user = {id: req.headers.authorization, name: u.name, zip: u.zip, hereFor: u.hereFor}
         res.json({message: 'found user', user: user})
       }
       else{
         res.status(404).json({ message: 'user not found' })
       }
+    } catch (error) {
+        res.json({error})
+    }
+}
+
+userController.getAll = async (req,res) => {
+    try {
+        const allUsers = await models.user.findAll()
+        res.json({allUsers})
     } catch (error) {
         res.json({error})
     }

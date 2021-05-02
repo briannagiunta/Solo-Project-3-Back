@@ -23,8 +23,7 @@ module.exports = (sequelize, DataTypes) => {
     start: DataTypes.STRING,
     end: DataTypes.STRING,
     address: DataTypes.STRING,
-    city: DataTypes.STRING,
-    state: DataTypes.STRING
+    zip: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'event',

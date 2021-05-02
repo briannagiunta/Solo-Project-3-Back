@@ -11,18 +11,26 @@ jobController.create = async (req,res) => {
         const user = await models.user.findOne({where:{
             id: decryptedId.userId,
         }})
-        const newJob = await models.job.create({
+        const newJob = await models.job.findOrCreate({where:{
             title: req.body.Title,
             description: req.body.Description,
             type: req.body.Type,
-            city: req.body.City,
-            state: req.body.State
+            zip: req.body.Zipcode
+        }
         })
-        await user.addJob(newJob)
-        await newJob.reload()
+        await user.addJob(newJob[0])
+        await newJob[0].reload()
         res.json({message: 'Job added', newJob})
     } catch (error) {
       res.json({error})
+    }
+}
+jobController.getAll = async (req,res) => {
+    try {
+        const allJobs = await models.job.findAll()
+        res.json({allJobs})
+    } catch (error) {
+        res.json({error})
     }
 }
 
