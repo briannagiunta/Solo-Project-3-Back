@@ -4,5 +4,7 @@ const jobRoutes = express.Router();
 
 jobRoutes.post('/create', jobController.create)
 jobRoutes.get('/all', jobController.getAll)
+jobRoutes.post('/save', jobController.save)
+jobRoutes.get('/:jobId', jobController.getOne)
 
 module.exports = jobRoutes;

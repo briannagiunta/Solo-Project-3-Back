@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 const models = require('../models')
 
+
 const eventController = {}
 
 eventController.create = async (req,res) => {
@@ -34,6 +35,35 @@ eventController.getAll = async (req,res) => {
         res.json({allEvents})
     } catch (error) {
         res.json({error})
+    }
+}
+
+eventController.getOne = async (req,res) =>{
+    try {
+        const event = await models.event.findOne({where:{
+            id:req.params.eventId
+        }})
+        res.json({event})
+    } catch (error) {
+        res.json({error})
+    }
+}
+
+eventController.save = async (req,res) => {
+    try {
+        const decryptedId = jwt.verify(req.headers.authorization, process.env.JWT_SECRET)
+        const user = await models.user.findOne({where:{
+            id: decryptedId.userId,
+        }})
+        const event = await models.event.findOne({where:{
+            id: req.body.eventId
+        }})
+
+        const savedEvent = await event.addUser(user)
+        res.json({message: 'event saved', savedEvent})
+    } catch (error) {
+        res.json({error})
+        
     }
 }
 
