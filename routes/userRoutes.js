@@ -12,6 +12,7 @@ userRoutes.get('/jobs/saved', userController.savedJobs)
 userRoutes.get('/events/added', userController.addedEvents)
 userRoutes.get('/jobs/added', userController.addedJobs)
 userRoutes.get('/posts', userController.userPosts)
+userRoutes.post('/zip', userController.getByZip)
 
 
 module.exports = userRoutes;

@@ -144,7 +144,17 @@ userController.addedJobs = async (req,res) =>{
         res.json({error})
     }
 }
-
+ userController.getByZip = async (req,res) =>{
+    try {
+        const users = await models.user.findAll({where:{
+            zip: req.body.zip
+        }})
+        res.json({users})
+    } catch (error) {
+        console.log(error);
+        res.json({error})
+    }
+ }
 
 
 module.exports = userController;

@@ -5,3 +5,9 @@ sequelize model:generate --name=job --attributes userId:integer,title:string,des
 sequelize model:generate --name=userJob --attributes userId:integer,jobId:integer
 sequelize model:generate --name=event --attributes userId:integer,title:string,description:string,type:string,date:string,start:string,end:string,address:string,city:string,state:string
 sequelize model:generate --name=userEvent --attributes userId:integer,eventId:integer
+
+sequelize model:generate --name=conversation --attributes userId:integer,userId2:integer
+
+sequelize model:generate --name=message --attributes userId:integer,conversationId:integer,content:string
+
+sequelize model:generate --name=userConversation --attributes userId:integer,conversationId:integer
