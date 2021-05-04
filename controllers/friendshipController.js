@@ -29,10 +29,7 @@ friendshipController.sendRequest = async (req,res) =>{
 
 friendshipController.getPendingSent = async (req,res)=>{
     try {
-
         const decryptedId = jwt.verify(req.headers.authorization, process.env.JWT_SECRET) 
-        // console.log(decryptedId);
-        // console.log(decryptedId.userId);
         let requests = await models.friendship.findAll({
             where: {
                 userId2: decryptedId.userId, // userId of loggedInUser
