@@ -17,7 +17,7 @@ userController.signUp = async (req, res) => {
 
       })
       const encryptedId = jwt.sign({ userId: u.id }, process.env.JWT_SECRET)
-      const user = {id: encryptedId, name: u.name, zip: u.zip, hereFor: u.hereFor}
+      const user = {id: encryptedId, name: u.name, email: u.email, zip: u.zip, hereFor: u.hereFor}
       res.json({message: 'Signed up', user: user})
     } catch (error) {
         res.json({error})
@@ -35,7 +35,7 @@ userController.login = async (req, res) => {
       })
       if (bcrypt.compareSync(req.body.Password, u.password)) {
         const encryptedId = jwt.sign({ userId: u.id }, process.env.JWT_SECRET)
-        const user = {id: encryptedId, name: u.name, zip: u.zip, hereFor: u.hereFor}
+        const user = {id: encryptedId, name: u.name, email: u.email, zip: u.zip, hereFor: u.hereFor}
         res.json({message: 'login successful', user: user })
       }else{
         res.status(401)
@@ -54,7 +54,7 @@ userController.getUser = async(req,res) => {
         id: decryptedId.userId
       }})
       if(u){
-        const user = {id: req.headers.authorization, name: u.name, zip: u.zip, hereFor: u.hereFor}
+        const user = {id: req.headers.authorization, name: u.name, email: u.email, zip: u.zip, hereFor: u.hereFor}
         res.json({message: 'found user', user: user})
       }
       else{
