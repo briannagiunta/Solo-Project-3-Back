@@ -15,7 +15,9 @@ module.exports = (sequelize, DataTypes) => {
       models.user.hasMany(models.event)
       models.user.belongsToMany(models.job,{through: 'userJob'})
       models.user.belongsToMany(models.event,{through: 'userEvent'})
-      
+      models.user.hasMany(models.friendship)
+      models.user.belongsToMany(models.conversation,{through: 'userConversation' })
+      models.user.hasMany(models.message)
     }
   };
   user.init({

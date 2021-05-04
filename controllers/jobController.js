@@ -34,6 +34,35 @@ jobController.getAll = async (req,res) => {
     }
 }
 
+jobController.getOne = async (req,res) =>{
+    try {
+        const job = await models.job.findOne({where:{
+            id:req.params.jobId
+        }})
+        res.json({job})
+    } catch (error) {
+        res.json({error})
+    }
+}
+
+jobController.save = async (req,res) => {
+    try {
+        const decryptedId = jwt.verify(req.headers.authorization, process.env.JWT_SECRET)
+        const user = await models.user.findOne({where:{
+            id: decryptedId.userId,
+        }})
+        const job = await models.job.findOne({where:{
+            id: req.body.jobId
+        }})
+
+        const savedJob = await job.addUser(user)
+        res.json({message: 'job saved', savedJob})
+    } catch (error) {
+        res.json({error})
+        
+    }
+}
+
 
 
 module.exports = jobController;

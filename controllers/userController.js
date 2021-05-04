@@ -50,7 +50,6 @@ userController.login = async (req, res) => {
 userController.getUser = async(req,res) => {
     try {
         const decryptedId = jwt.verify(req.headers.authorization, process.env.JWT_SECRET)
-        console.log(decryptedId);
         const u = await models.user.findOne({where:{
         id: decryptedId.userId
       }})
@@ -93,6 +92,68 @@ userController.userPosts = async(req,res) => {
     }
 }
 
+userController.savedEvents = async (req,res) =>{
+    try {
+        const decryptedId = jwt.verify(req.headers.authorization, process.env.JWT_SECRET)
+        const events = await models.userEvent.findAll({where:{
+            userId: decryptedId.userId
+        }})
+        res.json({events})
+        
+    } catch (error) {
+        res.json({error})
+    }
+}
+userController.savedJobs = async (req,res) =>{
+    try {
+        const decryptedId = jwt.verify(req.headers.authorization, process.env.JWT_SECRET)
+        const jobs = await models.userJob.findAll({where:{
+            userId: decryptedId.userId
+        }})
+        res.json({jobs})
+        
+    } catch (error) {
+        res.json({error})
+    }
+}
+
+userController.addedEvents = async (req,res) =>{
+    try {
+        const decryptedId = jwt.verify(req.headers.authorization, process.env.JWT_SECRET)
+        const user = await models.user.findOne({where:{
+        id: decryptedId.userId
+      }})
+
+        const events = await user.getEvents()
+        res.json({events})
+    } catch (error) {
+        res.json({error})
+    }
+}
+userController.addedJobs = async (req,res) =>{
+    try {
+        const decryptedId = jwt.verify(req.headers.authorization, process.env.JWT_SECRET)
+        const user = await models.user.findOne({where:{
+        id: decryptedId.userId
+      }})
+
+        const jobs = await user.getJobs()
+        res.json({jobs})
+    } catch (error) {
+        res.json({error})
+    }
+}
+ userController.getByZip = async (req,res) =>{
+    try {
+        const users = await models.user.findAll({where:{
+            zip: req.body.zip
+        }})
+        res.json({users})
+    } catch (error) {
+        console.log(error);
+        res.json({error})
+    }
+ }
 
 
 module.exports = userController;
