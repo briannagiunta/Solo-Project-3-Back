@@ -14,8 +14,6 @@ app.use(function(req, res, next) {
   next();
 });
 
-
-
 const userRoutes = require('./routes/userRoutes')
 const postRoutes = require('./routes/postRoutes')
 const commentRoutes = require('./routes/commentRoutes')
@@ -32,9 +30,7 @@ app.use('/friendships', friendshipRoutes)
 app.use('/convos', conversationRoutes)
 
 
-
-
-const PORT = process.env.port || 3001
+const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
     console.log(`port running on ${PORT}`)
   routesReport.print()
