@@ -3,6 +3,7 @@ const app = express()
 const rowdy = require ('rowdy-logger')
 const routesReport = rowdy.begin(app)
 
+
 app.use(express.json())
 app.use(require('cors')())
 app.use(function(req, res, next) {
@@ -12,9 +13,6 @@ app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Headers", 'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json');
   next();
 });
-
-
-
 
 
 
