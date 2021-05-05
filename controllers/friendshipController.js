@@ -65,7 +65,7 @@ friendshipController.getFriends = async(req,res)=>{
         const decryptedId = jwt.verify(req.headers.authorization, process.env.JWT_SECRET) 
         let acceptedFriends = await models.friendship.findAll({
             where: {
-                userId: decryptedId.userId,
+                userId2: decryptedId.userId,
                 accepted: true
             },
             include: 'friend'

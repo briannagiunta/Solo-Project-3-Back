@@ -110,7 +110,7 @@ userController.savedJobs = async (req,res) =>{
         const jobs = await models.userJob.findAll({where:{
             userId: decryptedId.userId
         }})
-        res.json({jobs})
+        res.json({message: 'saved jobs', jobs})
         
     } catch (error) {
         res.json({error})
