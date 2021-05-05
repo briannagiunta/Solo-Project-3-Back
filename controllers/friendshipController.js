@@ -68,7 +68,7 @@ friendshipController.getFriends = async(req,res)=>{
                 userId2: decryptedId.userId,
                 accepted: true
             },
-            include: 'friend'
+            include: models.user
         })
         res.json({ acceptedFriends})
     } catch (error) {
