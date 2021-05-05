@@ -6,6 +6,9 @@ const routesReport = rowdy.begin(app)
 app.use(express.json())
 app.use(require('cors')())
 
+
+
+
 const userRoutes = require('./routes/userRoutes')
 const postRoutes = require('./routes/postRoutes')
 const commentRoutes = require('./routes/commentRoutes')
