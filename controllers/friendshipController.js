@@ -76,6 +76,41 @@ friendshipController.getFriends = async(req,res)=>{
     }
 }
 
+// friendshipController.getFriends = async(req,res)=>{
+//     try {
+//         const decryptedId = jwt.verify(req.headers.authorization, process.env.JWT_SECRET) 
+//         let acceptedFriends = []
+//         let friendships = await models.friendship.findAll({
+//             where: {
+//                 userId: decryptedId.userId // userId of logged in user
+//             }
+//         })
+//         let friendships2 = await models.friendship.findAll({
+//             where: {
+//                 userId2: decryptedId.userId // userId of logged in user
+//             }
+//         })
+//         await friendships.forEach(async(friendship)=>{
+//             let accepted = friendship.accepted
+
+//             // console.log(accepted);
+//             await friendships2.forEach((friendship2)=>{
+//                 let accepted2 = friendship2.accepted
+//                 // console.log(accepted2);
+//                 if(accepted === true && accepted2 === true ){
+//                     console.log(friendship, friendship2);
+//                     acceptedFriends.push(friendship)
+//                 }
+//             })
+//         })
+
+
+//         res.json({acceptedFriends})
+//     } catch (error) {
+//         res.json({error})
+//     }
+// }
+
 friendshipController.acceptRequest = async (req,res) =>{
     try {
         const decryptedId = jwt.verify(req.headers.authorization, process.env.JWT_SECRET) 
